@@ -1,0 +1,13 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h3>Crear Nuevo Edificio</h3>
+
+<form method="post">
+  {% csrf_token %}
+  {{ formulario.as_p }}
+
+  <button type="submit">Guardar Edificio</button>
+</form>
+
+{% endblock %}

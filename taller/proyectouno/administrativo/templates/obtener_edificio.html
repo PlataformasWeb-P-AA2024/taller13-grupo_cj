@@ -1,0 +1,11 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h3>Detalles del Edificio</h3>
+
+<p><b>Nombre:</b> {{ edificio.nombre }}</p>
+<p><b>Dirección:</b> {{ edificio.direccion }}</p>
+<p><b>Ciudad:</b> {{ edificio.ciudad }}</p>
+<p><b>Tipo:</b> {{ edificio.get_tipo_display }}</p>
+
+{% endblock %}

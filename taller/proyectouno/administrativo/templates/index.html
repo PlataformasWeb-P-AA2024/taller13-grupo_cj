@@ -1,0 +1,52 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Listado de Edificios
+{% endblock %}
+
+{% block content %}
+<h2>Listado de Edificios</h2>
+
+<table id="data-table" class="display">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Ciudad</th>
+            <th>Tipo</th>
+            <th>Departamentos</th>
+            <th>Total Cuartos</th>
+            <th>Costo Total</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for edificio in edificios %}
+        <tr>
+            <td>{{ edificio.nombre }}</td>
+            <td>{{ edificio.direccion }}</td>
+            <td>{{ edificio.ciudad }}</td>
+            <td>{{ edificio.tipo }}</td>
+            <td>
+                <ul>
+                    {% for departamento in edificio.departamentos.all %}
+                    <li>
+                        {{ departamento.numero_cuartos }} cuartos - ${{ departamento.costo }}
+                        <a href="{% url 'editar_departamento' departamento.id %}">Editar</a>
+                        <a href="{% url 'eliminar_departamento' departamento.id %}" onclick="return confirm('¿Está seguro de que desea eliminar este departamento?')">Eliminar</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'crear_departamento_edificio' edificio.id %}">Agregar Departamento</a>
+            </td>
+            <td>{{ edificio.total_cuartos }}</td>
+            <td>${{ edificio.costo_total }}</td>
+            <td>
+                <a href="{% url 'editar_edificio' edificio.id %}">Editar Edificio</a>
+                <a href="{% url 'eliminar_edificio' edificio.id %}" onclick="return confirm('¿Está seguro de que desea eliminar este edificio?')">Eliminar Edificio</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
